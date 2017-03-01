@@ -6,6 +6,6 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
     return knex.schema.table('resources', function(t) {
-        t.dropColumn('quantity');
+        t.dropColumn('user_id');
     });
 };
