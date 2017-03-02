@@ -44,14 +44,15 @@ module.exports = (knex) => {
     })
   })
 
-
   router.get("/:id/edit", (req, res) => {
     res.render("edit.ejs");
   });
 
   router.get("/:id/collection", (req, res) => {
     res.render("mycollection.ejs");
-  })
+  });
+
+
 
   return router;
 }
