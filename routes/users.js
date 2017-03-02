@@ -18,6 +18,11 @@ module.exports = (knex) => {
     res.render("login.ejs");
   })
 
+  router.post("/login", (res, req) => {
+    console.log("login post");
+    res.redirect("/")
+  })
+
   router.get("/:id/edit", (req, res) => {
     res.render("edit.ejs");
   });
