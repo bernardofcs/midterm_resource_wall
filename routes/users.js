@@ -23,7 +23,7 @@ module.exports = (knex) => {
   });
 
   router.get("/:id/collection", (req, res) => {
-    res.render("collection.ejs");
+    res.render("mycollection.ejs");
   })
 
   return router;
