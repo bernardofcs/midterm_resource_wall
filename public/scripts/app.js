@@ -1,10 +1,12 @@
 $(document).ready(function (){
-  // $.ajax({
-  //   method: "GET",
-  //   url: "/users"
-  // }).done((users) => {
-  //   for(user of users) {
-  //     console.log('lel');
-  //   }
-  // });
+  function loadResources(){
+    $.ajax({
+      method: "GET",
+      url: "/resources"
+    }).done((resources) => {
+      for(resource of resources) {
+
+      }
+    });
+  }
 });
