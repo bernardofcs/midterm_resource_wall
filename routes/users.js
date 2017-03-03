@@ -50,7 +50,7 @@ module.exports = (knex) => {
     knex('resources').insert([{
       url: req.body.url,
       description: req.body.desc,
-      likeCount: 0,
+      likecount: 0,
       rating: 0,
       user_id: req.session.userId,
       date_created: '2017-03-02'
