@@ -25,16 +25,6 @@ module.exports = (knex) => {
     res.render("mycollection.ejs");
   })
 
-  router.get("/:id/collection", (req, res) => {
-    knex("resources")
-      .join("users", "user_id", "=", "users.id")
-      .select('*')
-      .where('user_id', '=', req.params.id)
-      .then((results) => {
-        res.json(results);
-      });
-  });
-
   router.post("/login", (req, res) => {
     console.log(req.body.userEmail, req.body.userPassword);
     knex('users').where({
