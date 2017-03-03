@@ -11,20 +11,41 @@ module.exports = (knex) => {
       .from("resources")
       .then((results) => {
         res.json(results);
-    });
+      });
   });
 
-  // router.get("/", (req, res) => {
-  //   res.render("login.ejs");
-  // })
+  router.get("/:id", (req, res) => {
+    knex("resources")
+      .join("users", "user_id", "=", "users.id")
+      .select('*')
+      .where('user_id', '=', req.params.id)
+      .then((results) => {
+        res.json(results);
+      });
+  });
+
+  router.post("/saveurl", (req, res) => {
+    knex('resources').insert([{
+      url: req.body.url,
+      description: req.body.desc,
+      likecount: 0,
+      rating: 0,
+      user_id: req.session.userId,
+      date_created: '2017-03-02'
+    }])
+      .then(function() {
+
+      })
+  })
+
 
   // router.get("/:id/edit", (req, res) => {
   //   res.render("edit.ejs");
   // });
 
-  // router.get("/:id/collection", (req, res) => {
-  //   res.render("mycollection.ejs");
-  // })
+  router.get("/:id/collection", (req, res) => {
+    res.render("mycollection.ejs");
+  })
 
   return router;
 }

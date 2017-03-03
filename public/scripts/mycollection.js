@@ -1,19 +1,20 @@
 $(document).ready(function (){
 
-  function loadResources(){
+
+  let $userid = 1; // session.id
+  function loadUserResources(){
     $.ajax({
       method: "GET",
-      url: "/resources"
+      url: `/users/${$userid}/collection`,
     }).done((resources) => {
-      $('#main-container').html('');
+      $('#my-container').html('');
       for(resource of resources) {
         let $resource = createResourceElement(resource);
-        $('#main-container').append($resource);
+        $('#my-container').append($resource);
       }
 
     });
   }
-
 
   function createResourceElement(resource){
     let resourceFormat = $(`<div class="card">
@@ -26,7 +27,6 @@ $(document).ready(function (){
 
     return resourceFormat;
   }
-  loadResources();
-  //loadUserResources();
+  loadUserResources();
 
 });
