@@ -2,20 +2,46 @@
 
 const express = require('express');
 const router  = express.Router();
+const md5 = require('md5');
 
 module.exports = (knex) => {
 
-  // router.get("/", (req, res) => {
-  //   knex
-  //     .select("*")
-  //     .from("users")
-  //     .then((results) => {
-  //       //res.json(results);
-  //   });
-  // });
+  function createAvatar(email){
+    const avatarUrlPrefix = `https://vanillicon.com/${md5(email)}`;
+    const avatars = {
+      small:   `${avatarUrlPrefix}_50.png`,
+      regular: `${avatarUrlPrefix}.png`,
+      large:   `${avatarUrlPrefix}_200.png`
+    }
+    console.log(avatars);
+    return avatars.small;
+  }
 
   router.get("/", (req, res) => {
     res.render("login.ejs");
+  })
+
+  router.post("/login", (req, res) => {
+    console.log(req.body.userEmail, req.body.userPassword);
+    knex('users').where({
+      email: req.body.userEmail,
+      password: req.body.userPassword
+    })
+      .asCallback(function(err, rows){
+        if(rows.length > 0){
+          res.redirect("/");
+        } else {
+          res.send("Username or password do not exist");
+        }
+      })
+  })
+
+  router.post("/register", (req, res) => {
+    knex('users').insert([{name: req.body.name, email: req.body.reg_email, password: req.body.reg_password, avatar: createAvatar(req.body.reg_email)
+    }])
+    .then(function(resp) {
+        res.redirect("/");
+    })
   })
 
   router.get("/:id/edit", (req, res) => {
@@ -26,15 +52,7 @@ module.exports = (knex) => {
     res.render("mycollection.ejs");
   });
 
-  router.post("/login", (req, res) => {
-    console.log("login post");
-    res.redirect("/");
-  });
 
-  router.post("/register", (req, res) => {
-    console.log("register post");
-    res.redirect("/");
-  });
 
   return router;
 }
