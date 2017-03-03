@@ -47,16 +47,18 @@ module.exports = (knex) => {
   })
 
   router.post("/saveurl", (req, res) => {
+    let date = new Date();
+    date = date.toISOString().slice(0,16).replace('T', ' ');
     knex('resources').insert([{
       url: req.body.url,
       description: req.body.desc,
       likecount: 0,
       rating: 0,
       user_id: req.session.userId,
-      date_created: '2017-03-02'
+      date_created: date
     }])
       .then(function() {
-        console.log("done");
+        res.redirect("/");
       })
   })
 
