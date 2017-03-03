@@ -1,11 +1,9 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
  <div class="container-fluid">
    <div class="navbar-header">
-     <a class="navbar-brand" href="#">Resource Wall</a>
+     <a class="navbar-brand" href="/:id/collection">Resource Wall</a>
    </div>
-   <ul class="nav navbar-nav">
-     <li class="active"><a href="#">Home</a></li>
-   </ul>
+
    <form class="navbar-form navbar-left">
      <div class="form-group">
        <input type="text" class="form-control" style="width: 500px" placeholder="Search">
@@ -14,9 +12,11 @@
    </form>
 
    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
-     Save
+     Add New Resource
    </button>
-
+   <ul class="nav navbar-nav">
+     <li id="home-button" class="active"><a href="#">Home</a></li>
+   </ul>
    <style media="screen">
      .modal-backdrop {
        z-index: 1020;
