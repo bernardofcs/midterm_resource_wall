@@ -29,6 +29,8 @@ module.exports = (knex) => {
     })
       .asCallback(function(err, rows){
         if(rows.length > 0){
+          req.session.userId = rows[0].id;
+          console.log(req.session.userId);
           res.redirect("/");
         } else {
           res.send("Username or password do not exist");
@@ -42,6 +44,20 @@ module.exports = (knex) => {
     .then(function(resp) {
         res.redirect("/");
     })
+  })
+
+  router.post("/saveurl", (req, res) => {
+    knex('resources').insert([{
+      url: req.body.url,
+      description: req.body.desc,
+      likeCount: 0,
+      rating: 0,
+      user_id: req.session.userId,
+      date_created: '2017-03-02'
+    }])
+      .then(function() {
+        console.log("done");
+      })
   })
 
   router.get("/:id/edit", (req, res) => {
