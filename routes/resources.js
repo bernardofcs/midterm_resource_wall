@@ -24,6 +24,16 @@ module.exports = (knex) => {
       });
   });
 
+  router.get("/liked/:id", (req, res) => {
+    knex("resources")
+      .join("likes", "resource_id", "=", "resources.id")
+      .select('*')
+      .where('likes.user_id', '=', req.params.id)
+      .then((results) => {
+        res.json(results);
+      });
+  });
+
   router.post("/saveurl", (req, res) => {
     knex('resources').insert([{
       url: req.body.url,

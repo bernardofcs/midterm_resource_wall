@@ -25,6 +25,10 @@ module.exports = (knex) => {
     res.render("mycollection.ejs");
   })
 
+  router.get("/liked", (req, res) => {
+    res.render("myliked.ejs");
+  })
+
   router.post("/login", (req, res) => {
     console.log(req.body.userEmail, req.body.userPassword);
     knex('users').where({
@@ -53,11 +57,7 @@ module.exports = (knex) => {
 
   router.get("/:id/edit", (req, res) => {
     res.render("edit.ejs");
-  });
-
-  router.get("/:id/collection", (req, res) => {
-    res.render("mycollection.ejs");
-  });
+  })
 
 
 
