@@ -5,7 +5,23 @@ const router  = express.Router();
 
 module.exports = (knex) => {
 
+  router.post("/addlike", (req, res) => {
+    console.log("you have reached the router!");
+    knex('resources')
+      .where('id', '=', req.body.resourceId)
+      .increment('likecount', 1)
+      .then(function() {
+        knex('likes').insert([{
+          user_id: req.session.userId,
+          resource_id: req.body.resourceId
+        }])
+        console.log("updated!")
+        res.redirect("/");
+      })
+  })
+
   router.get("/", (req, res) => {
+    console.log("hello resource /");
     knex
       .select("*")
       .from("resources")
@@ -47,7 +63,6 @@ module.exports = (knex) => {
         res.redirect("/");
       })
   })
-
 
   // router.get("/:id/edit", (req, res) => {
   //   res.render("edit.ejs");
