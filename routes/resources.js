@@ -59,10 +59,19 @@ module.exports = (knex) => {
       user_id: req.session.userId,
       date_created: '2017-03-02'
     }])
+
+  router.post("/add-likes", (req, res) => {
+    knex('resources')
+    .where('id', '=', req.body.resourceId)
+    .increment('likecount', 1)
       .then(function() {
         res.redirect("/");
       })
   })
+
+  // router.get("/", (req, res) => {
+  //   res.render("login.ejs");
+  // })
 
   // router.get("/:id/edit", (req, res) => {
   //   res.render("edit.ejs");

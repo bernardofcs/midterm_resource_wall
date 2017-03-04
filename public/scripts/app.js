@@ -32,15 +32,16 @@ $(document).ready(function (){
         <footer>
           <div class="url-rating">
             <span>${createStars(resource.rating)}</span>
-            <a class="likes-button" data-resourceId="${resource.id}" data-likes="${likes}" data-likeStatus="false">
+            <button class="likes-button" data-resourceId="${resource.id}" data-likes="${likes}" data-likeStatus="false">
               <i class="fa fa-heart" aria-hidden="true">${likes}</i>
-            </a>
+            </button>
           </div>
         </footer>
       </div>
     </div>`);
 
     $( ".likes-button" ).click(function(ev) {
+      // this.disabled = true;
       console.log("clicked");
       ev.stopPropagation();
       ev.preventDefault();
@@ -49,10 +50,10 @@ $(document).ready(function (){
       let resourceId = $(this).data("resourceid");
 
       if ( !likeStatus ) {
-        console.log("ajax call...", resourceId)
+        console.log("ajax call...")
         $.ajax({
           method: 'POST',
-          url: "resources/addlike",
+          url: "resources/add-likes",
           data: { resourceId: resourceId}
         })
         .done((response) => {
@@ -60,7 +61,7 @@ $(document).ready(function (){
           console.log("call complete");
         })
         .fail(console.error);
-    }
+      }
     })
 
     return resourceFormat;
