@@ -9,6 +9,18 @@ body {
 .url-image {
     width: 100%;
 }
+.likes-heart {
+  color: red;
+}
+
+.likes-button {
+  padding: 2px;
+  border-radius: 5px;
+}
+
+.likes-button:hover {
+  background-color: #ec6f85;
+}
 
 .url-rating {
     span.stars, span.stars span {

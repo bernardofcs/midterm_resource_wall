@@ -21,7 +21,6 @@ $(document).ready(function (){
     return result;
   }
 
-
   function createResourceElement(resource){
     let likes = resource.likecount ? resource.likecount : "";
 
@@ -33,35 +32,41 @@ $(document).ready(function (){
         <footer>
           <div class="url-rating">
             <span>${createStars(resource.rating)}</span>
-            <a class="likes-button" data-resourceId="${resource.id}" data-likes="${likes}" data-likeStatus="false">
+            <button class="likes-button" data-resourceId="${resource.id}" data-likes="${likes}" data-likeStatus="false">
               <i class="fa fa-heart" aria-hidden="true">${likes}</i>
-            </a>
+            </button>
           </div>
         </footer>
       </div>
     </div>`);
 
     $( ".likes-button" ).click(function(ev) {
-      // ev.stopPropagation();
-      // ev.preventDefault();
-      let likeStatus = $(ev.target).closest('a').data("likestatus");
-      let likes = $(ev.target).closest('a').val()
-      let tweetId = $(ev.target).closest('a').data("tweetid");
-        if ( !likeStatus ) {
-          $.ajax({
-            method: 'POST',
-            url: `/likes`,
-            data: { tweetId: tweetId},
-            success: loadTweets()
-          })
-          .done((response) => {
-          })
-          .fail(console.error);
+      // this.disabled = true;
+      console.log("clicked");
+      ev.stopPropagation();
+      ev.preventDefault();
+      let likeStatus = $(this).data("likestatus");
+      let likes = $(this).val()
+      let resourceId = $(this).data("resourceid");
+
+      if ( !likeStatus ) {
+        console.log("ajax call...")
+        $.ajax({
+          method: 'POST',
+          url: "resources/add-likes",
+          data: { resourceId: resourceId}
+        })
+        .done((response) => {
+          loadResources()
+          console.log("call complete");
+        })
+        .fail(console.error);
       }
     })
 
     return resourceFormat;
   }
   loadResources();
+  //loadUserResources();
 
 });

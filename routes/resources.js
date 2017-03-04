@@ -14,6 +14,14 @@ module.exports = (knex) => {
     });
   });
 
+  router.post("/add-likes", (req, res) => {
+    knex('resources')
+    .where('id', '=', req.body.resourceId)
+    .increment('likecount', 1)
+      .then(function() {
+        res.redirect("/");
+      })
+  })
   // router.get("/", (req, res) => {
   //   res.render("login.ejs");
   // })
