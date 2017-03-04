@@ -13,6 +13,8 @@ module.exports = (knex) => {
       .where('description', 'like', ('%' + search + '%'))
       .then((results) => {
         res.json(results)
+      });
+  });
 
   router.post("/addlike", (req, res) => {
     console.log("you have reached the router!");
