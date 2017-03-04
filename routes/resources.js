@@ -5,6 +5,17 @@ const router  = express.Router();
 
 module.exports = (knex) => {
 
+  router.post("/search", (req, res) => {
+    let search = req.body.searchText;
+    knex
+      .select('*')
+      .from("resources")
+      .where('description', 'like', ('%' + search + '%'))
+      .then((results) => {
+        res.json(results)
+      })
+  })
+
   router.get("/", (req, res) => {
     knex
       .select("*")
@@ -14,7 +25,9 @@ module.exports = (knex) => {
       });
   });
 
-  router.get("/:id", (req, res) => {
+
+
+  router.post("/mycollection/:id", (req, res) => {
     knex("resources")
       .join("users", "user_id", "=", "users.id")
       .select('*')

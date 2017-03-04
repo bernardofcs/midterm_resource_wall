@@ -38,7 +38,6 @@ module.exports = (knex) => {
       .asCallback(function(err, rows){
         if(rows.length > 0){
           req.session.userId = rows[0].id;
-          console.log(req.session.userId);
           res.redirect("/");
         } else {
           res.send("Username or password do not exist");

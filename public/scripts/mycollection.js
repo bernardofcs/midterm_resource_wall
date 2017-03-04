@@ -5,7 +5,7 @@ $(document).ready(function (){
   function loadUserResources(){
     $.ajax({
       method: "GET",
-      url: `/resources/${$userid}`,
+      url: `/resources/mycollection/${$userid}`,
     }).done((resources) => {
       $('#my-container').html('');
       for(resource of resources) {
