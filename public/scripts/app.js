@@ -26,6 +26,7 @@ $(document).ready(function (){
       }
     });
   }
+
   $('#searchButton').on('submit', function(event){
     event.preventDefault();
     $('#main-container').empty();

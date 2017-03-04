@@ -13,10 +13,25 @@ module.exports = (knex) => {
       .where('description', 'like', ('%' + search + '%'))
       .then((results) => {
         res.json(results)
+
+  router.post("/addlike", (req, res) => {
+    console.log("you have reached the router!");
+    knex('resources')
+      .where('id', '=', req.body.resourceId)
+      .increment('likecount', 1)
+      .then(function() {
+        knex('likes').insert([{
+          user_id: req.session.userId,
+          resource_id: req.body.resourceId
+        }])
+        console.log("updated!")
+        res.redirect("/");
+
       })
   })
 
   router.get("/", (req, res) => {
+    console.log("hello resource /");
     knex
       .select("*")
       .from("resources")
@@ -56,11 +71,20 @@ module.exports = (knex) => {
       user_id: req.session.userId,
       date_created: '2017-03-02'
     }])
+  })
+
+  router.post("/add-likes", (req, res) => {
+    knex('resources')
+    .where('id', '=', req.body.resourceId)
+    .increment('likecount', 1)
       .then(function() {
         res.redirect("/");
       })
   })
 
+  // router.get("/", (req, res) => {
+  //   res.render("login.ejs");
+  // })
 
   // router.get("/:id/edit", (req, res) => {
   //   res.render("edit.ejs");

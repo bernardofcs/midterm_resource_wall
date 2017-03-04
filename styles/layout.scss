@@ -24,7 +24,32 @@ div.card{
 .url-image {
     width: 100%;
 }
+.likes-heart {
+  color: red;
+}
+
+.likes-button {
+  padding: 2px;
+  border-radius: 5px;
+}
+
+.likes-button:hover {
+  background-color: #ec6f85;
+}
+
+// .url-rating {
+  //   span.stars, span.stars span {
+  //     display: block;
+  //     background: url(/images/stars.png) 0 -16px repeat-x;
+  //     width: 80px;
+  //     height: 16px;
+  // }
+  //
+  // span.stars span {
+  //     background-position: 0 0;
+  // }
+// }
 
   h1 {
     color: #244751;
-  }
+}

@@ -21,7 +21,7 @@ $(document).ready(function (){
       <div class="card-block">
         <h4 class="card-title">${resource.description}</h4>
         <p class="card-text">URL:  <iframe src="${resource.url}"></iframe></p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        <p class="card-text"><small class="text-muted">${resource.date_created}</small></p>
       </div>
     </div>`);
 
