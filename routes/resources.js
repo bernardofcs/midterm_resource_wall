@@ -59,6 +59,7 @@ module.exports = (knex) => {
       user_id: req.session.userId,
       date_created: '2017-03-02'
     }])
+  })
 
   router.post("/add-likes", (req, res) => {
     knex('resources')
