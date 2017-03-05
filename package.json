@@ -25,6 +25,7 @@
     "knex-logger": "^0.1.0",
     "md5": "^2.2.1",
     "morgan": "^1.7.0",
+    "node-jsdom": "^3.1.5",
     "node-sass-middleware": "^0.9.8",
     "nodemon": "^1.11.0",
     "pg": "^6.0.2"
