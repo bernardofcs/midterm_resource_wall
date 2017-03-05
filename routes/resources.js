@@ -5,15 +5,26 @@ const router  = express.Router();
 
 module.exports = (knex) => {
 
-  router.post("/search", (req, res) => {
-    let search = req.body.searchText;
-    knex
-      .select('*')
+  router.get("/search/:desc", (req, res) => {
+    // let search = req.body.searchText;
+    console.log('hello /search/:desc')
+    console.log('req.params.desc: ' + req.params.desc);
+    if(req.params.desc !== 'undefined'){
+      knex
+        .select('*')
+        .from("resources")
+        .where('description', 'like', ('%' + req.params.desc + '%'))
+        .then((results) => {
+          res.json(results);
+        });
+      }else{
+        knex
+      .select("*")
       .from("resources")
-      .where('description', 'like', ('%' + search + '%'))
       .then((results) => {
-        res.json(results)
+        res.json(results);
       });
+      }
   });
 
   router.post("/addlike", (req, res) => {
@@ -44,7 +55,7 @@ module.exports = (knex) => {
 
 
 
-  router.post("/mycollection/:id", (req, res) => {
+  router.get("/mycollection/:id", (req, res) => {
     knex("resources")
       .join("users", "user_id", "=", "users.id")
       .select('*')
@@ -72,7 +83,10 @@ module.exports = (knex) => {
       rating: 0,
       user_id: req.session.userId,
       date_created: '2017-03-02'
-    }])
+    }]).then(() => {
+      res.redirect("/");
+    }
+    )
   })
 
   router.post("/add-likes", (req, res) => {

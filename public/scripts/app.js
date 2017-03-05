@@ -13,25 +13,33 @@ $(document).ready(function (){
     });
   }
 
-  function searchResources(){
+  // function createResource(){
+  //   $.ajax({
+  //     method: "POST",
+  //     url:
+  //   });
+  // }
+
+  function searchResources(searchValue){
 
     $.ajax({
-      method: 'POST',
-      url: '/resources/search/'
+      method: 'GET',
+      url: `/resources/search/${searchValue}`
     }).done((result) => {
       $('#main-container').html('');
       for(resource of result) {
+        console.log('')
         let $resource = createResourceElement(resource);
         $('#main-container').prepend($resource);
       }
     });
   }
 
-  $('#searchButton').on('submit', function(event){
-    event.preventDefault();
+  $('#searchButton').on('click', function(event){
+    console.log('hello');
     $('#main-container').empty();
     let searchValue = $('#searchInput').val();
-    searchResources();
+    searchResources(searchValue);
   })
 
   function createResourceElement(resource){
