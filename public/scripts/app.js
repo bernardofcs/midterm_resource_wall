@@ -28,15 +28,14 @@ $(document).ready(function (){
     }).done((result) => {
       $('#main-container').html('');
       for(resource of result) {
-        console.log('')
         let $resource = createResourceElement(resource);
         $('#main-container').prepend($resource);
       }
     });
   }
 
-  $('#searchButton').on('submit', function(event){
-    console.log('hello');
+  $('#searchButton').on('click', function(event){
+    event.preventDefault();
     $('#main-container').empty();
     let searchValue = $('#searchInput').val();
     searchResources(searchValue);
@@ -53,12 +52,12 @@ $(document).ready(function (){
 
     return resourceFormat;
   }
-  if(($('#main-container').html() == '')){
-    console.log('notempty');
-   loadResources();
-  }
-  else{
-    console.log('empty')
-  }
+  // if(($('#main-container').html() == '')){
+  //   console.log('notempty');
+    loadResources();
+  // }
+  // else{
+  //   console.log('empty')
+  // }
 
 });
