@@ -98,7 +98,12 @@ $(document).ready(function (){
 
 
 
-  function searchResources(searchValue){
+  // if(($('#main-container').html() == '')){
+  //   console.log('notempty');
+
+  }
+
+   function searchResources(searchValue){
 
     $.ajax({
       method: 'GET',
@@ -118,11 +123,6 @@ $(document).ready(function (){
     let searchValue = $('#searchInput').val();
     searchResources(searchValue);
   })
-
-  // if(($('#main-container').html() == '')){
-  //   console.log('notempty');
-
-  }
 
   loadResources();
   // else{

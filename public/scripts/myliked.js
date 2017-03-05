@@ -20,7 +20,7 @@ $(document).ready(function (){
     let resourceFormat = $(`<div class="card">
       <div class="card-block">
         <h4 class="card-title">${resource.description}</h4>
-        <p class="card-text">URL:  <iframe src="${resource.url}"></iframe></p>
+        <p class="card-text"><a href="${resource.url}"><img style="max-height:100%;max-width:80%"src="${resource.image}"></a></p>
         <p class="card-text"><small class="text-muted">${resource.date_created}</small></p>
       </div>
     </div>`);
