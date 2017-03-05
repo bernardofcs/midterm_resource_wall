@@ -31,6 +31,7 @@ app.use(cookieSession({
 
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
+app.use(flash());
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
