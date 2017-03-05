@@ -51,6 +51,11 @@ module.exports = (knex) => {
     .then(function(resp) {
         res.redirect("/");
     })
+  });
+
+  router.post("/logout", (req, res) => {
+    req.session = null;
+    res.redirect("/users");
   })
 
 

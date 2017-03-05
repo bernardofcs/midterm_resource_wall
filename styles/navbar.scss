@@ -14,3 +14,30 @@ button.btn.btn-primary.btn-md {
     background-color: #222;
     /* background-color: #080808; */
 }
+
+.navbar {
+  height: 91px;
+}
+
+.navi {
+  overflow: auto;
+}
+
+.d-flex {
+  display: inline;
+}
+
+ul.nav, ul.nav li {
+  display: inline-block;
+  list-style: none;
+}
+
+.float-right {
+  float: right;
+}
+
+
+// div.navbar-nav {
+//   line-height: 91px;
+//   float: right;
+// }

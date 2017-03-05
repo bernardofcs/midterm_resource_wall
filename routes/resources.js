@@ -2,6 +2,19 @@
 
 const express = require('express');
 const router  = express.Router();
+var jsdom = require("node-jsdom");
+
+
+// jsdom.env(
+// HtmlString,
+//   function (errors, window) {
+//     var imgs = window.document.getElementsByTagName('img');
+//     for (var i = 0; i < imgs.length; i++) {
+//       var src = imgs[i].getAttribute('src');
+//       images.push(src);
+//     }
+//   });
+//   console.log(img_source('http://comicbook.com/thewalkingdead/2017/03/01/the-walking-dead-season-7-fills-out-imdbs-top-10-worst-episodes-/'));
 
 module.exports = (knex) => {
 
@@ -59,7 +72,7 @@ module.exports = (knex) => {
     knex("resources")
       .join("users", "user_id", "=", "users.id")
       .select('*')
-      .where('user_id', '=', req.params.id)
+      .where('user_id', '=', req.session.userId)
       .then((results) => {
         res.json(results);
       });
@@ -76,18 +89,36 @@ module.exports = (knex) => {
   });
 
   router.post("/saveurl", (req, res) => {
+  let desp = req.body.url;
+  console.log(desp);
+  jsdom.env(desp, function(errors, window){
+    var images = [];
+    let imageToDb = "";
+    var searchString = /.jpg/i;
+    var imgs = window.document.getElementsByTagName('img');
+    for (var i = 0; i < imgs.length; i++) {
+      var src = imgs[i].getAttribute('src');
+      let url = src.search(searchString, src);
+      if(!(url === -1)){
+        images.push(src);
+      }
+    }
+    console.log(images);
+
     knex('resources').insert([{
       url: req.body.url,
       description: req.body.desc,
+      image: images[0],
       likecount: 0,
       rating: 0,
       user_id: req.session.userId,
       date_created: '2017-03-02'
     }]).then(() => {
       res.redirect("/");
-    }
-    )
+    })
   })
+})
+
 
   router.post("/add-likes", (req, res) => {
     knex('resources')
