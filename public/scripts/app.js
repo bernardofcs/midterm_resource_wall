@@ -126,12 +126,13 @@ $(document).ready(function (){
       </div>
     </div>`);
 
-    return resourceFormat;
+    // return resourceFormat;
   }
   // if(($('#main-container').html() == '')){
   //   console.log('notempty');
-    loadResources();
-  // }
+
+  }
+  loadResources();
   // else{
   //   console.log('empty')
   // }

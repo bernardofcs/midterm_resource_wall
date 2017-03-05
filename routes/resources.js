@@ -66,6 +66,7 @@ module.exports = (knex) => {
     knex
       .select("*")
       .from("resources")
+      .orderBy('description', 'asc')
       .then((results) => {
         res.json(results);
       });
