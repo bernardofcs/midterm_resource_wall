@@ -35,7 +35,7 @@ $(document).ready(function (){
     });
   }
 
-  $('#searchButton').on('click', function(event){
+  $('#searchButton').on('submit', function(event){
     console.log('hello');
     $('#main-container').empty();
     let searchValue = $('#searchInput').val();
@@ -53,6 +53,12 @@ $(document).ready(function (){
 
     return resourceFormat;
   }
-  loadResources();
+  if(($('#main-container').html() == '')){
+    console.log('notempty');
+   loadResources();
+  }
+  else{
+    console.log('empty')
+  }
 
 });
