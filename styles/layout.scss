@@ -9,31 +9,47 @@ body {
 .url-image {
     width: 100%;
 }
-.likes-heart {
+.fa fa-heart {
   color: red;
 }
 
 .likes-button {
+  font-family: arial sans-serif;
+  color: red;
   padding: 2px;
-  border-radius: 5px;
+  width: 35px;
+  cursor: pointer;
+
 }
 
 .likes-button:hover {
   background-color: #ec6f85;
 }
 
-// .url-rating {
-  //   span.stars, span.stars span {
-  //     display: block;
-  //     background: url(/images/stars.png) 0 -16px repeat-x;
-  //     width: 80px;
-  //     height: 16px;
-  // }
-  //
-  // span.stars span {
-  //     background-position: 0 0;
-  // }
-// }
+.c-rating {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.c-rating__item {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 24px;
+      -ms-flex: 0 0 24px;
+          flex: 0 0 24px;
+  height: 24px;
+  background: url("../img/stars.svg");
+  background-position: 0 0;
+}
+
+.c-rating__item:hover,
+.c-rating__item.is-active {
+  background-position: -24px 0;
+}
 
   h1 {
     color: #244751;
