@@ -39,9 +39,9 @@ module.exports = (knex) => {
       });
       }
   });
-
-  router.post("/addlike", (req, res) => {
+  router.post("/add-likes", (req, res) => {
     console.log("you have reached the router!");
+    debugger;
     knex('resources')
       .where('id', '=', req.body.resourceId)
       .increment('likecount', 1)
@@ -49,6 +49,24 @@ module.exports = (knex) => {
         knex('likes').insert([{
           user_id: req.session.userId,
           resource_id: req.body.resourceId
+        }]).then( function() {
+          res.redirect("/");
+        })
+        console.log("updated!")
+      })
+  })
+
+  router.post("/ratings", (req, res) => {
+    knex('ratings')
+    .insert([{
+      user_id: req.session.userId,
+      resource_id: req.body.resourceId
+    }])
+      .then(function() {
+        knex('likes').insert([{
+          user_id: req.session.userId,
+          resource_id: req.body.resourceId,
+          rating: req.body.rating
         }])
         console.log("updated!")
         res.redirect("/");
@@ -61,6 +79,7 @@ module.exports = (knex) => {
     knex
       .select("*")
       .from("resources")
+      .orderBy('description', 'asc')
       .then((results) => {
         res.json(results);
       });
@@ -105,8 +124,9 @@ module.exports = (knex) => {
     }
     console.log(images);
 
+    let url_raw = req.body.url;
     knex('resources').insert([{
-      url: req.body.url,
+      url: url_raw,
       description: req.body.desc,
       image: images[0],
       likecount: 0,
