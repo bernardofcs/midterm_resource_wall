@@ -38,7 +38,6 @@ module.exports = (knex) => {
       .asCallback(function(err, rows){
         if(rows.length > 0){
           req.session.userId = rows[0].id;
-          console.log(req.session.userId);
           res.redirect("/");
         } else {
           res.send("Username or password do not exist");
@@ -55,8 +54,20 @@ module.exports = (knex) => {
   })
 
 
-  router.get("/:id/edit", (req, res) => {
+  router.get("/edit", (req, res) => {
     res.render("edit.ejs");
+  })
+
+  router.post("/update", (req, res) => {
+    knex('users').where('id', '=', req.session.userId)
+    .update({name: req.body.name,
+              email: req.body.email,
+              password: req.body.password})
+    .then(() => {
+      req.flash('editMessage', "Successfully edited!");
+      res.locals.messages = req.flash();
+      res.render('edit');
+    })
   })
 
 

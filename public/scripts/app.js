@@ -12,6 +12,7 @@ $(document).ready(function (){
     });
   }
 
+
   function createResourceElement(resource){
     let likes = resource.likecount ? resource.likecount : "";
     let resourceFormat = $(`<div class="card">
@@ -93,9 +94,46 @@ $(document).ready(function (){
         .fail(console.error);
     })
 
+
+
+  function searchResources(searchValue){
+
+    $.ajax({
+      method: 'GET',
+      url: `/resources/search/${searchValue}`
+    }).done((result) => {
+      $('#main-container').html('');
+      for(resource of result) {
+        let $resource = createResourceElement(resource);
+        $('#main-container').prepend($resource);
+      }
+    });
+  }
+
+  $('#searchButton').on('click', function(event){
+    event.preventDefault();
+    $('#main-container').empty();
+    let searchValue = $('#searchInput').val();
+    searchResources(searchValue);
+  })
+
+  function createResourceElement(resource){
+    let resourceFormat = $(`<div class="card">
+      <div class="card-block">
+        <h4 class="card-title">${resource.description}</h4>
+        <p class="card-text">URL:  <iframe <img src = "http://media.comicbook.com/2017/03/richonne-236020-320x180.jpg"></img> src="${resource.url}"></iframe></p>
+        <p class="card-text"><small class="text-muted">${resource.date_created}</small></p>
+      </div>
+    </div>`);
+
     return resourceFormat;
   }
-  loadResources();
-  //loadUserResources();
+  // if(($('#main-container').html() == '')){
+  //   console.log('notempty');
+    loadResources();
+  // }
+  // else{
+  //   console.log('empty')
+  // }
 
 });

@@ -1,10 +1,29 @@
 body {
-  background-color: #EEE;
+  background-color: #2d2b2b;
   padding-top: 4.5em;
 }
 
 #main-container {
   padding: 10% 1%;
+  background-color: #2d2b2b;
+}
+
+div.card{
+  border-radius: 20px;
+}
+
+.card-block{
+  border-radius: 20px;
+
+}
+
+iframe {
+  width: 100%;
+}
+
+.card-block:hover{
+  border: 1px solid black;
+  box-shadow: 3px 5px 5px #7c7c7c;
 }
 .url-image {
     width: 100%;
