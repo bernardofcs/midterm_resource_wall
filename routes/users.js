@@ -64,7 +64,9 @@ module.exports = (knex) => {
               email: req.body.email,
               password: req.body.password})
     .then(() => {
-      res.redirect('/');
+      req.flash('editMessage', "Successfully edited!");
+      res.locals.messages = req.flash();
+      res.render('edit');
     })
   })
 
