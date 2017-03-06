@@ -54,7 +54,24 @@ app.use("/resources", resourcesRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
-  res.render("index");
+  if(req.session.userId){
+    knex
+    .select('name')
+    .from('users')
+    .where('id', '=', req.session.userId)
+    .then((result) =>{
+      let loggedname = '';
+      for(let row of result){
+        loggedname = row.name;
+      }
+      res.render("index", {name: loggedname});
+    return;
+    })
+
+  }
+  else{
+    res.render("login.ejs")
+  }
 });
 
 app.listen(PORT, () => {

@@ -22,11 +22,33 @@ module.exports = (knex) => {
   })
 
   router.get("/collection", (req, res) => {
-    res.render("mycollection.ejs");
+    knex
+    .select('name')
+    .from('users')
+    .where('id', '=', req.session.userId)
+    .then((result) =>{
+      let loggedname = '';
+      for(let row of result){
+        loggedname = row.name;
+      }
+      res.render("mycollection", {name: loggedname});
+    return;
+    })
   })
 
   router.get("/liked", (req, res) => {
-    res.render("myliked.ejs");
+    knex
+    .select('name')
+    .from('users')
+    .where('id', '=', req.session.userId)
+    .then((result) =>{
+      let loggedname = '';
+      for(let row of result){
+        loggedname = row.name;
+      }
+      res.render("myliked.ejs", {name: loggedname});
+    return;
+    })
   })
 
   router.post("/login", (req, res) => {

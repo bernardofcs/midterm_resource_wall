@@ -21,26 +21,28 @@ $(document).ready(function (){
       <div class="card-block">
         <h4 class="card-title">${resource.description}</h4>
         <p class="card-text"><a href="${resource.url}"><img style="max-height:100%;max-width:80%"src="${resource.image}"></a></p>
-        <p class="card-text"><small class="text-muted">Date Created: ${resource.date_created}</small></p>
+        <p class="card-text"><small class="text-muted">Date Created: ${resource.date_created.replace('T', ' ').slice(0, 16)}</small></p>
         <footer>
             <button id="likes-button-${resource.id}" class="likes-button" data-resourceId="${resource.id}" data-likes="${likes}" data-likeStatus="false">
               <i class="fa fa-heart" aria-hidden="true"></i>${likes}
             </button>
-            <div class="rate-button" data-resourceId="${resource.id}" data-user_id="${resource.user_id}" >
-              Rate Me
-            </div>
-            <div id="#el">
-              <ul class="el c-rating">
-                <li class="c-rating__item" data-index="0"></li>
-                <li class="c-rating__item" data-index="1"></li>
-                <li class="c-rating__item" data-index="2"></li>
-                <li class="c-rating__item" data-index="3"></li>
-                <li class="c-rating__item" data-index="4"></li>
-              </ul>
-            </div>
+
         </footer>
       </div>
     </div>`);
+
+    // <div class="rate-button" data-resourceId="${resource.id}" data-user_id="${resource.user_id}" >
+    //           Rate Me
+    //         </div>
+    //         <div id="#el">
+    //           <ul class="el c-rating">
+    //             <li class="c-rating__item" data-index="0"></li>
+    //             <li class="c-rating__item" data-index="1"></li>
+    //             <li class="c-rating__item" data-index="2"></li>
+    //             <li class="c-rating__item" data-index="3"></li>
+    //             <li class="c-rating__item" data-index="4"></li>
+    //           </ul>
+    //         </div>
 
     $('#main-container').append(resourceFormat);
 

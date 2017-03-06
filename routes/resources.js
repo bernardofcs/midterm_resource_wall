@@ -92,7 +92,6 @@ module.exports = (knex) => {
   })
 
   router.get("/", (req, res) => {
-    console.log("hello resource /");
     knex
       .select("*")
       .from("resources")
@@ -104,7 +103,7 @@ module.exports = (knex) => {
 
 
 
-  router.get("/mycollection/:id", (req, res) => {
+  router.get("/mycollection", (req, res) => {
     knex("resources")
       .join("users", "user_id", "=", "users.id")
       .select('*')
@@ -114,11 +113,11 @@ module.exports = (knex) => {
       });
   });
 
-  router.get("/liked/:id", (req, res) => {
+  router.get("/liked", (req, res) => {
     knex("resources")
       .join("likes", "resource_id", "=", "resources.id")
       .select('*')
-      .where('likes.user_id', '=', req.params.id)
+      .where('likes.user_id', '=', req.session.userId)
       .then((results) => {
         res.json(results);
       });
