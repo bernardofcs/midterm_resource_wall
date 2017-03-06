@@ -93,7 +93,7 @@ module.exports = (knex) => {
     .then(() => {
       req.flash('editMessage', "Successfully edited!");
       res.locals.messages = req.flash();
-      res.render('edit');
+      res.redirect('/');
     })
   })
 
