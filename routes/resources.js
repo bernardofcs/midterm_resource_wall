@@ -122,13 +122,17 @@ module.exports = (knex) => {
         images.push(src);
       }
     }
-    console.log(images);
+    if(images.length === 0){
+      imageToDb = '/images/no_image.gif';
+    } else {
+      imageToDb = images[0];
+    }
 
     let url_raw = req.body.url;
     knex('resources').insert([{
       url: url_raw,
       description: req.body.desc,
-      image: images[0],
+      image: imageToDb,
       likecount: 0,
       rating: 0,
       user_id: req.session.userId,

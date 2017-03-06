@@ -1,7 +1,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
  <div class="navi flex-row">
    <div class="navbar-header">
-     <a class="navbar-brand" href="/:id/collection">Resource Wall</a>
+     <a class="navbar-brand" href="/">Resource Wall</a>
    </div>
 
 
@@ -19,9 +19,15 @@
    </button>
 
    <ul class="nav float-right">
-    <li id="home-button" class="active">
-      <a href="#">Home</a>
-    </li>
+     <li id="edit-button" class="active">
+       <a href="users/edit">Edit</a>
+     </li>
+     <li id="edit-button" class="active">
+       <a href="users/liked">My Liked Resources</a>
+     </li>
+     <li id="edit-button" class="active">
+      <a href="users/collection">My Collection</a>
+     </li>
     <li>
        <form action="/users/logout" method="post">
          <button type="submit" class="btn btn-primary btn-sm">Logout</button>
@@ -48,7 +54,7 @@
            <div class="modal-body">
              <div class="col-lg-6">
                <div class="input-group">
-                 <input type="text" name = "url" id = "url-link" class="form-control" placeholder="Paste your link">
+                 <input type="url" name = "url" id = "url-link" class="form-control" placeholder="Paste your link">
                </div><!-- /input-group -->
              </div><!-- /.col-lg-6 -->
            </div>
